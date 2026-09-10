@@ -1,171 +1,306 @@
 # 🏦 Bank Customer Retention & Churn Analysis
 
-> An end-to-end customer retention analysis identifying the customer characteristics and segments most strongly associated with churn, and where retention efforts could be prioritised.
+<p align="center">
+  <strong>An end-to-end analytical case study identifying customer characteristics and meaningful customer segments associated with churn using Excel, SQL and Power BI.</strong>
+</p>
 
-This project analyses **10,000 European bank customers** to understand customer attrition across demographics, engagement and product ownership. The analysis progresses from exploratory analysis in Excel, through deeper customer segmentation in SQL, to an interactive Power BI dashboard designed to communicate retention priorities clearly.
-
-The goal was not simply to report which customers churned, but to determine **where churn risk is concentrated, whether those patterns persist when customer characteristics are combined, and which meaningful customer segments warrant further investigation**.
-
----
-
-## 📌 Business Problem
-
-Customer attrition can affect long-term customer relationships and business performance, but an overall churn figure alone does not tell decision-makers **which customers are most at risk or where retention efforts should be focused**.
-
-**The core problem:** the bank has customer-level demographic, account and churn data, but needs to translate it into a clearer understanding of the characteristics and customer segments associated with attrition.
-
-**Why it matters:**
-
-- A bank-wide churn rate can hide substantial differences between customer groups.
-- Retention efforts may be inefficient if every customer is treated as equally at risk.
-- Extremely high churn rates in very small segments can be misleading if customer population is ignored.
-- Understanding where churn is concentrated can help prioritise further investigation and retention testing.
-
-**Key stakeholders:** Customer Retention teams, Customer Experience teams, Product teams and business leadership responsible for monitoring customer attrition and engagement.
+<p align="center">
+  <img src="https://img.shields.io/badge/Power%20BI-Dashboard-F2C811?logo=powerbi&logoColor=black" />
+  <img src="https://img.shields.io/badge/SQL-Segmentation-336791?logo=postgresql&logoColor=white" />
+  <img src="https://img.shields.io/badge/DAX-Measures-1F4E79" />
+  <img src="https://img.shields.io/badge/Excel-EDA-217346?logo=microsoftexcel&logoColor=white" />
+  <img src="https://img.shields.io/badge/GitHub-Portfolio-181717?logo=github&logoColor=white" />
+</p>
 
 ---
 
-## 🎯 Project Objective
+## 📖 Project Overview
 
-This analysis was designed to transform customer data into a structured framework for understanding and prioritising churn risk.
+Customer attrition is one of the most important metrics in retail banking, but an overall churn rate alone does not explain **which customers are leaving**, **where churn is concentrated**, or **which customer groups should receive retention attention first**.
 
-Specifically, it aims to:
+This project analyses a dataset of **10,000 bank customers** across **France, Germany and Spain** to investigate how churn varies across customer demographics, engagement behaviour and product ownership. The analysis progresses through **Excel for exploratory analysis**, **SQL for multi-dimensional customer segmentation**, and **Power BI for interactive business reporting**.
 
-- Measure the bank's overall customer churn rate.
-- Identify customer characteristics associated with higher churn.
-- Compare churn patterns across geographic markets.
-- Investigate whether age, activity and product ownership interact to create higher-risk profiles.
+Rather than stopping at descriptive charts, the project combines customer characteristics to identify **meaningful high-risk segments** while balancing **churn rate**, **segment size**, and **churned customer volume** to support better retention prioritisation.
+
+---
+
+# 📌 Business Problem
+
+The bank has customer-level demographic, account and churn information, but needs to translate raw customer data into actionable retention insights.
+
+An overall churn rate of **20.37%** hides significant differences between customer groups. Without understanding **where churn is concentrated**, retention teams risk treating every customer as equally at risk.
+
+### Why this matters
+
+- Identify customer groups with materially higher churn.
+- Compare churn across geographic markets.
+- Understand how customer characteristics interact.
+- Avoid prioritising very small customer groups with misleading churn percentages.
+- Provide a business-focused framework for retention investigation.
+
+### Potential Stakeholders
+
+- Customer Retention Teams
+- Customer Experience Teams
+- Product Teams
+- Business Intelligence Analysts
+- Commercial & Business Leadership
+
+---
+
+# 🎯 Project Objectives
+
+The analysis was designed to answer a series of business-focused retention questions.
+
+### Objectives
+
+- Measure the overall customer churn rate.
+- Identify demographic characteristics associated with higher churn.
+- Compare churn across France, Germany and Spain.
+- Investigate churn across age groups, activity status and product ownership.
+- Analyse how multiple customer characteristics interact.
 - Identify meaningful high-risk customer segments.
-- Balance **churn risk with customer exposure** when considering retention priorities.
-- Translate analytical findings into evidence-based areas for further investigation.
-
-### Business Questions Answered
-
-1. What is the bank's overall churn rate?
-2. Which geographic market experiences the highest churn?
-3. Which age groups have the highest churn rates?
-4. How does customer activity relate to churn?
-5. How does product ownership relate to churn?
-6. Does balance show the same relationship with churn across different customer groups?
-7. Which combinations of customer characteristics create the highest-risk meaningful segments?
-8. Are high-risk customer profiles unique to one country or present across multiple markets?
-9. Which customer segments should receive the greatest retention attention based on both risk and exposure?
+- Prioritise customer segments using both **churn rate** and **customer population**.
+- Translate findings into actionable retention recommendations.
 
 ---
 
-## 📊 Dataset Overview
+# ❓ Business Questions Answered
+
+- What is the bank's overall churn rate?
+- Which country experiences the highest churn?
+- Which age groups churn the most?
+- Do inactive customers churn more than active customers?
+- How does product ownership relate to churn?
+- Does balance show different churn behaviour across countries?
+- Which combinations of customer characteristics create the highest-risk customer profiles?
+- Which customer segments should receive retention investigation first?
+
+---
+
+# 📊 Dataset Overview
 
 | Attribute | Description |
-|---|---|
-| **Source** | Maven Analytics – Bank Customer Churn dataset |
-| **Rows** | 10,000 customers |
-| **Original Columns** | 13 |
+|------------|-------------|
+| **Source** | Maven Analytics – Bank Customer Churn Dataset |
 | **Industry** | Banking / Financial Services |
-| **Geography** | France, Germany and Spain |
-| **Target Variable** | `Exited` – whether the customer left the bank |
-| **Key Variables** | Geography, Age, Credit Score, Tenure, Balance, Number of Products, Credit Card Ownership, Activity Status, Estimated Salary, Exited |
-| **Derived Variables** | Age groups and balance groups created for segmentation |
-| **Data Quality** | No duplicate records or missing values identified during validation |
-| **Limitations** | No churn reasons, customer satisfaction, complaints, transaction history, product pricing, profitability or longitudinal behavioural data |
+| **Customers** | **10,000** |
+| **Original Features** | 13 customer attributes |
+| **Countries** | France, Germany, Spain |
+| **Target Variable** | `Exited` (Customer churn) |
+| **Analysis Tools** | Excel, SQL (SQLite), Power BI, DAX |
+| **Derived Features** | Age Bands, Balance Groups, Customer Segments |
 
-> **Important:** The dataset supports identification of associations and high-risk customer segments. It does not establish why customers churned or prove that the observed characteristics caused churn.
+### Key Variables
+
+- Geography
+- Age
+- Credit Score
+- Balance
+- Tenure
+- Number of Products
+- Credit Card Ownership
+- Activity Status
+- Estimated Salary
+- Exited (Churn)
+
+### Data Validation
+
+The dataset was validated before analysis.
+
+- ✅ No duplicate customer records.
+- ✅ No missing values detected.
+- ✅ Category values standardised.
+- ✅ Numeric fields checked for inconsistencies.
+
+### Dataset Limitations
+
+The dataset does **not** contain:
+
+- Customer satisfaction scores
+- Complaint history
+- Transaction behaviour over time
+- Marketing interactions
+- Reasons for account closure
+- Customer profitability
+- Longitudinal behavioural history
+
+> **Important:** This project identifies **associations** between customer characteristics and churn. It does **not** establish causal reasons why customers leave.
 
 ---
 
-## 🛠️ Tools & Technologies
+# 🛠️ Tools & Technologies
 
 | Tool | Purpose |
-|---|---|
-| **Microsoft Excel** | Data validation, PivotTables and initial exploratory analysis |
-| **SQL / SQLite** | Aggregation, conditional analysis and multi-dimensional customer segmentation |
-| **Power BI** | Interactive dashboard development and stakeholder-focused reporting |
-| **DAX** | Churn-rate measures, customer counts and calculated segmentation fields |
-| **GitHub** | Project documentation and portfolio presentation |
+|------|---------|
+| **Microsoft Excel** | Data validation and exploratory analysis using PivotTables. |
+| **SQL (SQLite)** | Multi-dimensional segmentation and conditional aggregation. |
+| **Power BI** | Interactive dashboard development and reporting. |
+| **Power Query** | Data transformation and preparation. |
+| **DAX** | KPI measures, churn calculations and calculated columns. |
+| **GitHub** | Documentation and portfolio presentation. |
+
+### Technical Skills Demonstrated
+
+- Power Query transformations
+- DAX Measures
+- Calculated Columns
+- Conditional Aggregations
+- Customer Segmentation
+- Interactive Dashboard Design
+- Business Intelligence Reporting
+- Data Storytelling
 
 ---
 
-## 🔄 Methodology
+# 🔄 Analytical Workflow
 
 ```text
-Raw Customer Data
-        ↓
-Data Validation
-        ↓
-Exploratory Analysis — Excel
-        ↓
-Initial Risk Factors Identified
-        ↓
-Deeper Segmentation — SQL
-        ↓
-Risk + Exposure Analysis
-        ↓
-Interactive Reporting — Power BI
-        ↓
-Retention Priorities
+Raw Customer Dataset
+        │
+        ▼
+Data Validation (Excel)
+        │
+        ▼
+Exploratory Analysis
+        │
+        ▼
+Identify Initial Churn Patterns
+        │
+        ▼
+SQL Customer Segmentation
+        │
+        ▼
+Segment Validation & Prioritisation
+        │
+        ▼
+Power BI Dashboard Development
+        │
+        ▼
+Business Insights & Retention Priorities
 ```
 
-**Data Validation** — The dataset was checked for duplicates, missing values, numeric-range issues and inconsistent categories before analysis.
+### Methodology
 
-**Exploratory Analysis** — Excel PivotTables were used to establish the overall churn rate and compare churn across geography, age, activity status, number of products, balance, credit score, tenure and credit-card ownership.
+#### 1. Data Validation (Excel)
 
-**Risk-Factor Identification** — Geography, age, activity status, product ownership and balance emerged as the strongest areas for deeper investigation, while tenure, credit-card ownership and most credit-score groups showed weaker differentiation.
+Validated customer records and established baseline metrics before analysis.
 
-**SQL Segmentation** — SQL was used to move beyond isolated characteristics and investigate how geography, age, activity and product ownership interact.
+#### 2. Exploratory Analysis (Excel)
 
-**Segment Validation** — A minimum population threshold of **50 customers** was applied to the final segmentation. This prevented very small groups with extreme churn percentages from dominating retention priorities.
+Compared churn across:
 
-**Power BI Reporting** — The findings were translated into a two-page interactive dashboard. The first page communicates the overall churn landscape, while the second focuses on meaningful high-risk customer segments and their exposure.
+- Geography
+- Age
+- Activity Status
+- Product Ownership
+- Balance
+- Credit Score
+- Tenure
+- Credit Card Ownership
+
+#### 3. Customer Segmentation (SQL)
+
+SQL was used to investigate interactions between multiple customer characteristics.
+
+**Techniques used**
+
+- `CASE WHEN`
+- Conditional Aggregation
+- `GROUP BY`
+- `HAVING`
+- Multi-dimensional segmentation
+- Customer population filtering
+
+#### 4. Segment Validation
+
+A **minimum customer population threshold of 50 customers** was applied when identifying priority customer segments.
+
+> This was a **pragmatic analytical choice**, used to reduce the influence of very small segments with extreme churn percentages rather than a statistically derived cutoff.
+
+#### 5. Interactive Reporting (Power BI)
+
+The SQL findings were translated into a two-page Power BI dashboard focused on communicating retention priorities to stakeholders.
 
 ---
 
-## 📈 Dashboard Preview
+# 📸 Dashboard Preview
 
-### Customer Churn Overview
+## Customer Churn Overview
 
 ![Customer Churn Overview](Images/customer_churn_overview.png)
 
-*High-level view of overall churn and how churn rates vary across geography, age, product ownership and customer activity. The geography filter enables interactive comparison between France, Germany and Spain.*
+**Purpose**
 
-### Retention Priorities
+Provides an interactive overview of churn patterns across customer demographics and engagement characteristics.
+
+**Dashboard Features**
+
+- KPI cards
+- Geography slicer
+- Interactive filtering
+- Customer churn comparisons
+- Cross-filtering between visuals
+
+---
+
+## Retention Priorities
 
 ![Retention Priorities](Images/retention_priorities.png)
 
-*Customer-segment view designed to identify where retention attention could be prioritised. The bubble chart compares segment churn rate with customer population, with bubble size representing churned-customer volume.*
+**Purpose**
+
+Identifies customer segments with elevated observed churn rates while balancing churn rate with customer population.
+
+The bubble chart compares:
+
+- **X-axis:** Customer population
+- **Y-axis:** Churn rate
+- **Bubble size:** Number of churned customers
+
+This helps distinguish **high churn percentages** from **high business exposure**.
 
 ---
 
-## 📊 Key KPIs
+# 📊 Headline Metrics
 
-| KPI | Result |
-|---|---:|
-| **Total Customers** | 10,000 |
-| **Churned Customers** | 2,037 |
-| **Overall Churn Rate** | 20.37% |
-| **Highest-Churn Geography** | Germany – 32.44% |
-| **Highest-Churn Age Group** | 48–57 – 55.26% |
-| **Inactive Customer Churn Rate** | 26.85% |
-| **Active Customer Churn Rate** | 14.27% |
-| **Highest-Risk Meaningful Segment** | Germany · 48–57 · Inactive · 1 Product |
-| **Highest-Risk Segment Churn Rate** | 89.23% |
+| Metric | Value |
+|--------|------:|
+| **Total Customers** | **10,000** |
+| **Churned Customers** | **2,037** |
+| **Overall Churn Rate** | **20.37%** |
 
----
+### Highest Observed Churn Characteristics
 
-## 🔍 Key Findings
-
-### 1. Germany has the highest geographic churn rate
-
-- **Germany:** 32.44%
-- **Spain:** 16.67%
-- **France:** 16.15%
-
-Germany's churn rate is approximately twice that of France and Spain, making it the clearest geographic area for deeper investigation.
+| Finding | Result |
+|---------|-------|
+| Highest Churn Geography | **Germany — 32.44%** |
+| Highest Churn Age Group | **48–57 — 55.26%** |
+| Inactive Customer Churn | **26.85%** |
+| Active Customer Churn | **14.27%** |
+| Highest-Risk Meaningful Segment | **Germany · 48–57 · Inactive · 1 Product** |
+| Segment Churn Rate | **89.23%** |
 
 ---
 
-### 2. Churn is strongly concentrated among customers aged 48–57
+# 🔍 Key Findings
+
+## 1. Germany has the highest overall churn rate
+
+| Country | Churn Rate |
+|---------|-----------:|
+| Germany | **32.44%** |
+| Spain | 16.67% |
+| France | 16.15% |
+
+Germany's churn rate is approximately **double** that of France and Spain, making it the strongest geographic area for further investigation.
+
+---
+
+## 2. Churn is concentrated among customers aged 48–57
 
 | Age Group | Churn Rate |
-|---|---:|
+|-----------|-----------:|
 | 18–27 | 7.16% |
 | 28–37 | 9.56% |
 | 38–47 | 24.54% |
@@ -173,200 +308,213 @@ Germany's churn rate is approximately twice that of France and Spain, making it 
 | 58–67 | 39.52% |
 | 68+ | 11.98% |
 
-Churn rises substantially from the 38–47 group and peaks among customers aged **48–57**.
-
-The pattern is not linear across all ages, however, as churn falls again among customers aged 68+.
+Churn increases sharply from age **38–47** before peaking among customers aged **48–57**.
 
 ---
 
-### 3. Inactive customers have substantially higher churn
+## 3. Inactive customers churn substantially more than active customers
 
-- **Inactive customers:** 26.85%
-- **Active customers:** 14.27%
+| Activity Status | Churn Rate |
+|----------------|-----------:|
+| **Inactive** | **26.85%** |
+| Active | 14.27% |
 
-Inactive customers therefore churn at almost twice the rate of active customers.
+Inactive customers experience almost **twice the observed churn rate** of active customers.
 
-This makes customer activity an important characteristic for identifying retention risk, although the available data cannot determine whether inactivity itself causes churn.
+This highlights customer engagement as an important area for retention monitoring, although the dataset cannot determine whether inactivity causes churn.
 
 ---
 
-### 4. Product ownership has a non-linear relationship with churn
+## 4. Product ownership has a non-linear relationship with churn
 
 | Number of Products | Churn Rate |
-|---|---:|
+|-------------------|-----------:|
 | 1 | 27.71% |
-| 2 | 7.58% |
+| **2** | **7.58%** |
 | 3 | 82.71% |
 | 4 | 100.00% |
 
-Customers with **two products have substantially lower churn than customers with one product**.
+Customers with **two products** have the lowest observed churn.
 
-Customers with three or four products show extremely high churn; however, these populations are much smaller — **266 customers with three products and 60 with four** — so these results require additional investigation rather than a conclusion that additional products cause churn.
-
----
-
-### 5. Balance-related churn is concentrated within particular customer groups
-
-At an overall level:
-
-- **0–100k balance:** ~15.9% churn
-- **100k–200k balance:** ~25.0% churn
-- **200k+ balance:** ~55.9% churn
-
-However, the highest balance group contains only **34 customers**, making its headline rate unreliable for broad prioritisation.
-
-Deeper SQL analysis showed that the 100k–200k balance relationship was particularly pronounced in **Germany**, where churn reached approximately **36%**, compared with approximately **17% in France and 16% in Spain**.
-
-This suggests balance should not be interpreted as an isolated churn driver; its relationship with churn differs across customer groups.
+Customers with **three or four products** show extremely high churn percentages, but these groups contain relatively few customers (**266** and **60** respectively) and should therefore be interpreted cautiously.
 
 ---
 
-### 6. Germany's overall churn problem becomes more concentrated among older customers
+## 5. Balance becomes more meaningful when combined with other characteristics
 
-Within Germany:
+Balance alone showed a mixed relationship with churn.
 
-| Age Group | Churn Rate |
-|---|---:|
-| 18–27 | ~10% |
-| 28–37 | ~17% |
-| 38–47 | ~38% |
-| **48–57** | **~69%** |
-| 58–67 | ~59% |
-| 68+ | ~19% |
+| Balance Band | Churn Rate |
+|-------------|-----------:|
+| 0–100K | ~15.9% |
+| 100K–200K | ~25.0% |
+| 200K+ | ~55.9% |
 
-This demonstrates that Germany's elevated overall churn is not distributed equally across its customer base.
+However, the **200K+** group contains only **34 customers**, making its headline churn rate unreliable for broad prioritisation.
 
-Customers aged **48–57** represent the most severe age-based concentration.
+Further SQL analysis showed the relationship was particularly pronounced within **Germany**, demonstrating that balance should be interpreted alongside geography and customer demographics rather than in isolation.
 
 ---
 
-### 7. Combining age and activity reveals substantially greater risk
+## 6. Multi-dimensional segmentation reveals the highest-risk customer profile
 
-Among German customers aged **48–57**:
+Rather than analysing characteristics individually, SQL combined:
 
-- **Inactive:** ~80% churn
-- **Active:** ~54% churn
+- Geography
+- Age Group
+- Activity Status
+- Number of Products
 
-The elevated churn observed among this age group therefore persists regardless of activity status, but is substantially more severe among inactive customers.
+This produced meaningful customer segments with sufficient population size.
 
----
-
-### 8. The highest-risk meaningful segment combines multiple characteristics
-
-The final SQL segmentation combined:
-
-**Geography + Age Group + Activity Status + Number of Products**
-
-A minimum segment size of **50 customers** was applied to avoid prioritising statistically fragile groups.
-
-The highest-risk meaningful segment was:
+### Highest-Risk Meaningful Segment
 
 | Characteristic | Result |
-|---|---|
-| **Geography** | Germany |
-| **Age Group** | 48–57 |
-| **Activity Status** | Inactive |
-| **Products** | 1 |
-| **Customers** | 130 |
-| **Churned Customers** | 116 |
-| **Churn Rate** | **89.23%** |
+|---------------|--------|
+| Geography | Germany |
+| Age Group | 48–57 |
+| Activity Status | Inactive |
+| Products | 1 |
+| Customers | **130** |
+| Churned Customers | **116** |
+| Churn Rate | **89.23%** |
 
 This compares with a bank-wide churn rate of **20.37%**.
 
 ---
 
-### 9. The high-risk profile is not unique to Germany
+## 7. The high-risk customer profile appears across multiple countries
 
-The same **48–57 · Inactive · 1 Product** profile appears among the highest-risk meaningful segments in every country:
+The same customer profile appears among the highest-risk meaningful segments across every market.
 
-| Geography | Customers | Churned Customers | Churn Rate |
-|---|---:|---:|---:|
-| **Germany** | 130 | 116 | **89.23%** |
-| **Spain** | 61 | 47 | **77.05%** |
-| **France** | 154 | 116 | **75.32%** |
-
-Germany has the greatest severity, but the underlying customer profile exists across all three markets.
+| Country | Customers | Churned Customers | Churn Rate |
+|---------|----------:|------------------:|-----------:|
+| Germany | 130 | 116 | **89.23%** |
+| Spain | 61 | 47 | **77.05%** |
+| France | 154 | 116 | **75.32%** |
 
 This changes the interpretation from:
 
-> "Germany is the churn problem"
+> **"Germany is the churn problem."**
 
 to:
 
-> **"Germany has the most severe churn, while older, inactive, single-product customers represent a broader cross-market risk profile."**
+> **"Germany has the highest churn severity, while older, inactive, single-product customers represent a broader cross-market churn profile."**
 
 ---
 
-## 💼 Business Impact
+# 📈 Business Impact
 
-The analysis transforms a bank-wide churn figure into a more targeted framework for customer-retention decision-making.
+The project translates a single churn metric into a framework for retention prioritisation.
 
-It enables stakeholders to:
+### The analysis enables stakeholders to
 
-- **Prioritise retention investigation** around customer groups with materially elevated churn rather than targeting the entire customer base equally.
-- **Identify geographic concentration** by highlighting Germany as the market with the greatest overall churn severity.
-- **Recognise cross-market risk patterns** by showing that older, inactive, single-product customers experience elevated churn across France, Germany and Spain.
-- **Balance risk with exposure** by considering customer population and churned-customer volume alongside churn percentage.
-- **Avoid misleading priorities** by filtering out very small segments that produce extreme percentages but represent few customers.
-- **Direct further research** toward the areas where additional behavioural, satisfaction and customer-experience data could provide the greatest value.
+- Focus retention investigation on customer groups with materially elevated churn.
+- Compare churn severity across markets.
+- Identify customer profiles that recur across multiple countries.
+- Balance churn rate with customer population and churned-customer volume.
+- Avoid prioritising extremely small customer groups with misleading percentages.
+- Highlight where additional behavioural or customer experience data would provide the greatest value.
 
-> 📌 **In short:** the analysis moves from *"20.37% of customers churn"* to *"these are the meaningful customer groups where churn is most concentrated and where further retention investigation should begin."*
+### Business Value
 
----
+Instead of reporting:
 
-## 🚀 Recommendations
+> **20.37% of customers churned.**
 
-| Recommendation | Why It Matters |
-|---|---|
-| **Prioritise older, inactive, single-product customers for retention investigation** | This profile consistently appears among the highest-risk meaningful segments across all three countries |
-| **Investigate Germany-specific customer experience factors** | Germany has substantially higher overall churn than France or Spain, suggesting additional market-specific factors may exist |
-| **Identify declining customer engagement earlier** | Inactivity is consistently associated with higher churn and may provide a useful signal for proactive outreach |
-| **Investigate the one-product customer experience** | One-product customers have substantially higher churn than two-product customers |
-| **Review 3- and 4-product customers separately** | Their extreme churn rates warrant investigation, but their small populations make broad conclusions inappropriate |
-| **Use risk and exposure together when prioritising segments** | A high churn percentage alone does not indicate how many customers are affected |
-| **Test retention interventions before scaling them** | The analysis identifies associations, not causal effects; proposed interventions should therefore be validated experimentally |
+The analysis identifies:
+
+> **Which customer groups should be investigated first and why.**
 
 ---
 
-## ⚠️ Limitations
+# 💡 Recommendations
 
-The available dataset is suitable for identifying **where churn is concentrated**, but it cannot establish the underlying reasons customers leave.
-
-The dataset does not include:
-
-- Customer complaints
-- Customer satisfaction scores
-- Reasons for account closure
-- Transaction history over time
-- Changes in customer engagement over time
-- Product pricing or fees
-- Service interactions
-- Marketing or retention contacts
-- Customer profitability or revenue contribution
-
-The analysis should therefore be interpreted as **descriptive and diagnostic segmentation rather than causal analysis**.
-
-In addition, several customer groups — particularly those with three or four products and balances above 200k — contain relatively few customers. Extreme churn percentages in these groups were therefore treated cautiously.
+| Recommendation | Business Rationale |
+|---------------|-------------------|
+| Prioritise older, inactive, single-product customers for retention investigation. | Highest observed churn across all three countries. |
+| Investigate Germany-specific customer experience factors. | Germany shows substantially higher overall churn. |
+| Develop monitoring for declining customer engagement. | Activity status is associated with higher churn; longitudinal engagement data could enable earlier intervention. |
+| Review the experience of one-product customers. | One-product customers consistently churn more than two-product customers. |
+| Investigate three- and four-product customers separately. | Extremely high churn exists within much smaller customer populations. |
+| Prioritise segments using both churn rate and customer population. | Large high-risk segments may create greater business impact than smaller extreme segments. |
+| Validate retention interventions before scaling. | The analysis identifies associations rather than causal effects. |
 
 ---
 
-## 🔮 Next Steps
+# ⚠️ Limitations
 
-The analysis provides a foundation for more advanced customer-retention analytics.
+This project is **descriptive and diagnostic**, not predictive.
 
-Future development could include:
+### The analysis cannot determine
 
-- **Customer engagement monitoring** — track changes in transaction and account activity over time to identify declining engagement.
-- **Churn-reason analysis** — incorporate customer complaints, satisfaction and account-closure reasons.
-- **Customer-value analysis** — combine churn risk with profitability or lifetime value to prioritise commercially important customers.
-- **Segment monitoring** — track churn rates for high-risk customer segments over time.
-- **Retention experimentation** — test targeted interventions using controlled trials or A/B testing.
-- **Predictive churn modelling** — develop an early-warning model once sufficient historical and behavioural data is available.
-- **Automated reporting** — connect Power BI to a regularly refreshed data source for ongoing retention monitoring.
+- Why customers left.
+- Whether inactivity causes churn.
+- Whether adding products reduces churn.
+- Whether geographic differences are driven by external factors.
+
+### Additional limitations
+
+- No behavioural history or transaction timelines.
+- No customer satisfaction or complaint data.
+- No customer profitability or lifetime value.
+- No marketing or retention campaign history.
+- Some customer groups contain relatively small populations and require cautious interpretation.
 
 ---
 
-## 📂 Project Structure
+# 🚀 Future Improvements
+
+Potential extensions of this project include:
+
+- 📈 Predictive churn modelling using historical behavioural data.
+- 👥 Customer lifetime value segmentation.
+- 📊 Customer profitability analysis.
+- 🔄 Time-series monitoring of customer engagement.
+- 🎯 Retention intervention / A/B testing analysis.
+- 🤖 Machine learning churn prediction model.
+- ☁️ Automated Power BI refresh connected to a live database.
+
+---
+
+# ⭐ Skills Demonstrated
+
+### Business Intelligence
+
+- Power BI Dashboard Development
+- KPI Design
+- Interactive Reporting
+- Data Storytelling
+- Dashboard Layout & UX
+
+### SQL Analytics
+
+- Conditional Aggregation
+- CASE WHEN Segmentation
+- Multi-dimensional GROUP BY Analysis
+- HAVING Filters
+- Customer Population Thresholds
+
+### Data Analysis
+
+- Exploratory Data Analysis
+- Customer Segmentation
+- Churn Analysis
+- Business Insight Generation
+- Analytical Thinking
+
+### Technical Skills
+
+- Microsoft Excel
+- SQL (SQLite)
+- Microsoft Power BI
+- Power Query
+- DAX
+- GitHub Documentation
+
+---
+
+# 📂 Repository Structure
 
 ```text
 Bank-Customer-Retention-Churn-Analysis/
@@ -384,21 +532,32 @@ Bank-Customer-Retention-Churn-Analysis/
 │   ├── customer_churn_overview.png
 │   └── retention_priorities.png
 │
-└── README.md
+├── README.md
+└── LICENSE
 ```
 
 ---
 
-## ⭐ Skills Demonstrated
+# 📚 Key Takeaways
 
-`Business Analysis` `Customer Segmentation` `Microsoft Excel` `SQL` `Power BI` `DAX` `Exploratory Data Analysis` `Data Validation` `Data Visualization` `Dashboard Design` `Business Intelligence` `Analytical Thinking` `Stakeholder Communication` `Data Storytelling`
+This project demonstrates an end-to-end analytical workflow that progresses from **raw customer data** to **business-focused retention recommendations**.
+
+Key analytical lessons include:
+
+- High churn percentages should always be interpreted alongside customer population.
+- Multi-dimensional segmentation reveals patterns that single-variable analysis can hide.
+- Customer characteristics may interact differently across markets.
+- Observed churn patterns should be treated as associations rather than causal conclusions.
+- Effective dashboards communicate business priorities rather than simply displaying metrics.
 
 ---
 
-## 📚 Key Takeaways
+# ✅ Conclusion
 
-This project reinforced that **the highest percentage is not automatically the highest business priority**. Customer population, exposure and the reliability of each segment must be considered alongside churn rate.
+This project showcases an end-to-end **Business Intelligence and Customer Analytics** workflow using **Excel, SQL and Power BI** to transform raw customer data into actionable retention insights.
 
-The analysis began with individual characteristics in Excel, progressed into multi-dimensional segmentation in SQL, and concluded with a Power BI dashboard designed around a business decision: **where should retention attention be focused?**
+Starting with exploratory analysis, progressing through SQL-based customer segmentation, and culminating in a two-page interactive Power BI dashboard, the project demonstrates the ability to move from **data validation → analysis → segmentation → stakeholder reporting**.
 
-Most importantly, the project demonstrates the ability to move from **data → pattern → deeper investigation → customer segment → business priority**, while recognising the difference between an observed association and a causal explanation.
+Rather than identifying only where churn exists, the analysis highlights **which customer segments combine elevated churn rates with meaningful customer populations**, providing a practical framework for prioritising future retention investigation.
+
+This portfolio project demonstrates core skills expected in **Data Analyst** and **Business Intelligence Analyst** graduate roles, including data cleaning, SQL analysis, DAX development, dashboard design, customer segmentation and business-focused data storytelling.
