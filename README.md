@@ -122,7 +122,7 @@ Retention Priorities
 
 ### Customer Churn Overview
 
-![Customer Churn Overview](Images/customer_churn_overview.png)
+![Customer Churn Overview](Images/churn_overview.png)
 
 *High-level view of overall churn and how churn rates vary across geography, age, product ownership and customer activity. The geography filter enables interactive comparison between France, Germany and Spain.*
 
