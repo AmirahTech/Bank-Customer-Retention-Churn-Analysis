@@ -257,7 +257,7 @@ The final SQL segmentation combined:
 
 **Geography + Age Group + Activity Status + Number of Products**
 
-A minimum segment size of **50 customers** was applied to avoid prioritising statistically fragile groups.
+A minimum segment size of **50 customers** was applied to reduce the influence of very small groups with extreme churn rates.
 
 The highest-risk meaningful segment was:
 
